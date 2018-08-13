@@ -1,16 +1,14 @@
-# Ayn Random #
+# Constable #
 
-This is a Discord bot written for nodejs. It was tested and written for v7.8.0 of Node, and utilizes es6 features.
+This is a Discord bot written in NodeJS. This bot is used on the /r/guns official Discord subreddit for shitposting purposes.
 
 Features of the bot:
 
-* Dice rolling. Syntax: !roll XdY+5 or !roll XdY XdY XdY-5
+* Random list-based responses, e.g. !wuteat giving a list of foods
 
-* Setting the nickname. The bot requires the 'change nickname' permission. 
+* Static responses e.g. !dsl giving a link to an image.
 
-* Setting the avatar. This command is severely rate-limited and can only done about 3 times before a time out.
-
-* Responses. The bot will respond when any messages contains the 'trigger' phrase and responds with the 'response' message. It is stored in 'responses.json'. 
+* Markov chain generation based on json files (Hesalite, OleMissTexan), users (!mimic @user), channels (!summary #textchannel)
 
 # Installation #
 

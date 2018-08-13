@@ -1,12 +1,12 @@
 {
-  "name": "ayn-random",
+  "name": "constable",
   "version": "1.0.0",
   "description": "A bot for the /r/guns Discord",
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js"
   },
-  "repository": "https://bitbucket.org/trentv4/ayn-random",
+  "repository": "https://github.com/trentv4/Constable",
   "keywords": [
     "discord",
     "bot"
