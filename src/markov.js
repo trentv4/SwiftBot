@@ -1,13 +1,10 @@
 const markov = require("markovchain")
 const fs = require("fs")
 
-const SHITPOST_CHANNEL_ID = 478602548442300427
-const HESALITE = JSON.parse(fs.readFileSync("data/hesalite.json"))
-const OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/OLEMISSTEXAN.json"))
-
-function getUsername(message) {
-	return message.member.nickname == null ? message.author.username : message.member.nickname;
-}
+const SHITPOST_CHANNEL_ID = 478663825910923274
+const DATA_HESALITE = JSON.parse(fs.readFileSync("data/hesalite.json"))
+const DATA_OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/OLEMISSTEXAN.json"))
+const DATA_TAYLOR = JSON.parse(fs.readFileSync("data/TAYLOR.json"))
 
 function markovFile(inputFile) {
 	let chain = new markov(inputFile.join("."))
@@ -33,15 +30,14 @@ let commands = {
 				if(item.content[0] == "!") return
 				filteredMessages.push(item.content)				
 			})
-			console.log(filteredMessages)
-			let chain = new markov(filteredMessages.join("."))
-			let startPhrase = filteredMessages[Math.floor(Math.random() * filteredMessages.length)].split(" ")[0]
-			let length = Math.floor((Math.random() * 20) + 60)
 
-			message.channel.send(chain.start(startPhrase).end(length).process())
+			message.channel.send(markov(filteredMessages))
 		}).catch(e => console.log(e))
 	},
 	mimic: (commands, message) => {
+		// Only allowed in shitposting channel
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
+
 		let target = undefined
 		try {
 			target = message.mentions.users.first().id
@@ -79,15 +75,53 @@ let commands = {
 					all.push(out[i][g])
 				}
 			}
-			let chain = new markov(all.join(" "))
-			message.channel.send(chain.start(all[Math.floor(Math.random() * all.length)].split(" ")[0]).end((Math.random() * 10) + 20).process())
+			message.channel.send(markov(all))
 		})
+	}, 
+	//Hesalite triggers
+	dog: (commands, message) => {
+		message.channel.send(markovFile(DATA_HESALITE))
 	},
-	hesalite: (commands, message) => {
-		message.channel.send(markovFile(HESALITE))
+	girlfriend: (commands, message) => {
+		message.channel.send(markovFile(DATA_HESALITE))
 	},
-	olemisstexan: (commands, message) => {
-		message.channel.send(markovFile(OLEMISSTEXAN))		
+	BAR: (commands, message) => {
+		message.channel.send(markovFile(DATA_HESALITE))
+	},
+	FNMilitaryCollector: (commands, message) => {
+		message.channel.send(markovFile(DATA_HESALITE))
+	},
+	// OleMissTexan triggers
+	serve: (commands, message) => {
+		message.channel.send(markovFile(DATA_OLEMISSTEXAN))
+	},
+	oink: (commands, message) => {
+		message.channel.send(markovFile(DATA_OLEMISSTEXAN))
+	},
+	protect: (commands, message) => {
+		message.channel.send(markovFile(DATA_OLEMISSTEXAN))		
+	},
+	// Taylor Swift triggers
+	basicbitch: (commands, message) => {
+		let verse = ""
+		for(let i = 0; i <= 5; i++) {
+			verse += markovFile(DATA_TAYLOR) + "\n"
+		}
+		message.channel.send(verse)
+	},
+	starbucks: (commands, message) => {
+		let verse = ""
+		for(let i = 0; i <= 5; i++) {
+			verse += markovFile(DATA_TAYLOR) + "\n"
+		}
+		message.channel.send(verse)
+	},
+	nevereverever: (commands, message) => {
+		let verse = ""
+		for(let i = 0; i <= 5; i++) {
+			verse += markovFile(DATA_TAYLOR) + "\n"
+		}
+		message.channel.send(verse)
 	}
 }
 
