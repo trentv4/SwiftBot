@@ -1,7 +1,9 @@
 const markov = require("markovchain")
 const fs = require("fs")
 
+// Change to appropriate shitposting hole while in developer mode
 const SHITPOST_CHANNEL_ID = 478663825910923274
+// Constant data that is loaded from files and never changes.
 const DATA_HESALITE = JSON.parse(fs.readFileSync("data/hesalite.json"))
 const DATA_OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/OLEMISSTEXAN.json"))
 const DATA_TAYLOR = JSON.parse(fs.readFileSync("data/TAYLOR.json"))
@@ -14,6 +16,7 @@ function markovFile(inputFile) {
 }
 
 let commands = {
+	// Feeds a channel into a markov chain
 	summary: (commands, message) => {
 		// Only allowed in shitposting channel
 		if(message.channel.id != SHITPOST_CHANNEL_ID) return
@@ -34,6 +37,7 @@ let commands = {
 			message.channel.send(markov(filteredMessages))
 		}).catch(e => console.log(e))
 	},
+	// Feeds a user into a markov chain
 	mimic: (commands, message) => {
 		// Only allowed in shitposting channel
 		if(message.channel.id != SHITPOST_CHANNEL_ID) return
@@ -80,29 +84,37 @@ let commands = {
 	}, 
 	//Hesalite triggers
 	dog: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_HESALITE))
 	},
 	girlfriend: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_HESALITE))
 	},
 	BAR: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_HESALITE))
 	},
 	FNMilitaryCollector: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_HESALITE))
 	},
 	// OleMissTexan triggers
 	serve: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_OLEMISSTEXAN))
 	},
 	oink: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_OLEMISSTEXAN))
 	},
 	protect: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		message.channel.send(markovFile(DATA_OLEMISSTEXAN))		
 	},
 	// Taylor Swift triggers
 	basicbitch: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		let verse = ""
 		for(let i = 0; i <= 5; i++) {
 			verse += markovFile(DATA_TAYLOR) + "\n"
@@ -110,6 +122,7 @@ let commands = {
 		message.channel.send(verse)
 	},
 	starbucks: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		let verse = ""
 		for(let i = 0; i <= 5; i++) {
 			verse += markovFile(DATA_TAYLOR) + "\n"
@@ -117,6 +130,7 @@ let commands = {
 		message.channel.send(verse)
 	},
 	nevereverever: (commands, message) => {
+		if(message.channel.id != SHITPOST_CHANNEL_ID) return
 		let verse = ""
 		for(let i = 0; i <= 5; i++) {
 			verse += markovFile(DATA_TAYLOR) + "\n"
