@@ -5,8 +5,8 @@ const fs = require("fs")
 const SHITPOST_CHANNEL_ID = 478663825910923274
 // Constant data that is loaded from files and never changes.
 const DATA_HESALITE = JSON.parse(fs.readFileSync("data/hesalite.json"))
-const DATA_OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/OLEMISSTEXAN.json"))
-const DATA_TAYLOR = JSON.parse(fs.readFileSync("data/TAYLOR.json"))
+const DATA_OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/olemisstexan.json"))
+const DATA_TAYLOR = JSON.parse(fs.readFileSync("data/taylor.json"))
 
 function markovFile(inputFile) {
 	let chain = new markov(inputFile.join("."))
