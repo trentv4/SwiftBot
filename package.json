@@ -1,0 +1,20 @@
+{
+  "name": "ayn-random",
+  "version": "1.0.0",
+  "description": "A bot for the /r/guns Discord",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "repository": "https://bitbucket.org/trentv4/ayn-random",
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "Trentv4",
+  "license": "LGPL-2.1+",
+  "dependencies": {
+    "discord.js": "^11.4.1",
+    "markovchain": "^1.0.2"
+  }
+}
