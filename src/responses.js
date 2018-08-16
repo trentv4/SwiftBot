@@ -10,9 +10,15 @@ fs.readdirSync("data/lists").forEach(file => {
 	let cleanName = file.substring(0, file.length-5)
 	data[cleanName] = JSON.parse(fs.readFileSync("data/lists/" + file, "utf-8"))
 	commands[cleanName] = (commands, message) => {
-		message.channel.send(data[cleanName][Math.floor(Math.random() * data[cleanName].length)])
+		message.channel.send()
 	}
 })
+
+commands.wutmeal = (command, message) => {
+	let eat = data.wuteat[Math.floor(Math.random() * data.wuteat.length)]
+	let drink = data.wutdrink[Math.floor(Math.random() * data.wutdrink.length)]
+	message.channel.send("\"" + eat + "\" and \"" + drink + "\"")
+}
 
 // This handles static commands, one-to-one responses
 // Think !brinnels or !dsl
