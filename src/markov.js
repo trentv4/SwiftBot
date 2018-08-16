@@ -19,7 +19,6 @@ function markovFile(dataset, length) {
 		let startPhrase = dataset[Math.floor(Math.random() * dataset.length)].split(" ")[0]
 		let output = chain.start(startPhrase).end(currentLength).process()
 		currentLength -= output.split(" ").length + 1
-		response += output
 
 		let lastChar = output[output.length-1]
 		if(lastChar == "," || lastChar == "." || lastChar == "!" || lastChar == ".") {
@@ -137,8 +136,8 @@ let commands = {
 		if(!isChannelAllowed(message)) return
 
 		let verse = "**Taylor Swift**: \n"
-		for(let i = 0; i < 5; i++) {
-			verse += markovFile(DATA_TAYLOR) + "\n"
+		for(let i = 0; i < 4; i++) {
+			verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
 		}
 		message.channel.send(verse)
 	},
@@ -146,8 +145,8 @@ let commands = {
 		if(!isChannelAllowed(message)) return
 
 		let verse = "**Taylor Swift**: \n"
-		for(let i = 0; i < 5; i++) {
-			verse += markovFile(DATA_TAYLOR) + "\n"
+		for(let i = 0; i < 4; i++) {
+			verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
 		}
 		message.channel.send(verse)
 	},
@@ -161,7 +160,7 @@ let commands = {
 			verse = "**Taylor Swift**: \n"
 			for(let g = 0; g < 4; g++) {
 				for(let i = 0; i < 4; i++) {
-					verse += markovFile(DATA_TAYLOR) + "\n"
+					verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
 				}
 				verse += "\n"
 			}
