@@ -10,9 +10,26 @@ const DATA_TAYLOR = JSON.parse(fs.readFileSync("data/taylor.json"))
 
 function markovFile(dataset, length) {
 	let chain = new markov(dataset.join("."))
-	let startPhrase = dataset[Math.floor(Math.random() * dataset.length)].split(" ")[0]
-	let lengthP = length == undefined ? Math.floor((Math.random() * 20) + 60) : length
-	return chain.start(startPhrase).end(lengthP).process()
+
+	let assignedLength = length == undefined ? Math.floor((Math.random() * 30) + 10) : length
+	let currentLength = assignedLength
+	let response = ""
+
+	while(response.split(" ").length <= assignedLength) {
+		let startPhrase = dataset[Math.floor(Math.random() * dataset.length)].split(" ")[0]
+		let output = chain.start(startPhrase).end(currentLength).process()
+		currentLength -= output.split(" ").length + 1
+		response += output
+
+		let lastChar = output[output.length-1]
+		if(lastChar == "," || lastChar == "." || lastChar == "!" || lastChar == ".") {
+			response += output + " "
+		} else {
+			response += output + ". "
+		}
+	}
+
+	return response
 }
 
 function isChannelAllowed(message) {
@@ -143,7 +160,7 @@ let commands = {
 		while(length >= 2000) {
 			verse = "**Taylor Swift**: \n"
 			for(let g = 0; g < 4; g++) {
-				for(let i = 0; i <= 5; i++) {
+				for(let i = 0; i < 4; i++) {
 					verse += markovFile(DATA_TAYLOR) + "\n"
 				}
 				verse += "\n"
