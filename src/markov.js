@@ -8,18 +8,28 @@ const DATA_HESALITE = JSON.parse(fs.readFileSync("data/hesalite.json"))
 const DATA_OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/olemisstexan.json"))
 const DATA_TAYLOR = JSON.parse(fs.readFileSync("data/taylor.json"))
 
-function markovFile(inputFile) {
-	let chain = new markov(inputFile.join("."))
-	let startPhrase = inputFile[Math.floor(Math.random() * inputFile.length)].split(" ")[0]
-	let length = Math.floor((Math.random() * 20) + 60)
-	return chain.start(startPhrase).end(length).process()
+function markovFile(dataset, length) {
+	let chain = new markov(dataset.join("."))
+	let startPhrase = dataset[Math.floor(Math.random() * dataset.length)].split(" ")[0]
+	let lengthP = length == undefined ? Math.floor((Math.random() * 20) + 60) : length
+	return chain.start(startPhrase).end(lengthP).process()
+}
+
+function isChannelAllowed(message) {
+	return message.channel.id == SHITPOST_CHANNEL_ID || message.guild.id == 478602305302954000;
+}
+
+function sendMarkovMessage(message, name, dataset, length) {
+	if(isChannelAllowed(message)) {
+		message.channel.send("**" + name + "**: \n" + markovFile(dataset, length))
+	}
 }
 
 let commands = {
 	// Feeds a channel into a markov chain
 	summary: (commands, message) => {
 		// Only allowed in shitposting channel
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
+		if(!isChannelAllowed(message.channel.id)) return
 
 		let channel = message.mentions.channels.first()
 		if(channel == undefined) {
@@ -34,13 +44,13 @@ let commands = {
 				filteredMessages.push(item.content)				
 			})
 
-			message.channel.send(markov(filteredMessages))
+			message.channel.send(markov(filteredMessages.join(" ")))
 		}).catch(e => console.log(e))
 	},
 	// Feeds a user into a markov chain
 	mimic: (commands, message) => {
 		// Only allowed in shitposting channel
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
+		if(!isChannelAllowed(message.channel.id)) return
 
 		let target = undefined
 		try {
@@ -79,66 +89,69 @@ let commands = {
 					all.push(out[i][g])
 				}
 			}
-			message.channel.send(markov(all))
-		})
+			message.channel.send(markov(all.join(" ")))
+		}).catch(e => console.log(e))
 	}, 
 	//Hesalite triggers
 	dog: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_HESALITE))
+		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
 	},
 	girlfriend: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_HESALITE))
+		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
 	},
 	BAR: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_HESALITE))
+		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
 	},
 	FNMilitaryCollector: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_HESALITE))
+		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
 	},
 	// OleMissTexan triggers
 	serve: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_OLEMISSTEXAN))
+		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
 	},
 	oink: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_OLEMISSTEXAN))
+		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
 	},
 	protect: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		message.channel.send(markovFile(DATA_OLEMISSTEXAN))		
+		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
 	},
 	// Taylor Swift triggers
 	basicbitch: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		let verse = ""
-		for(let i = 0; i <= 5; i++) {
+		if(!isChannelAllowed(message)) return
+
+		let verse = "**Taylor Swift**: \n"
+		for(let i = 0; i < 5; i++) {
 			verse += markovFile(DATA_TAYLOR) + "\n"
 		}
 		message.channel.send(verse)
 	},
 	starbucks: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
-		let verse = ""
-		for(let i = 0; i <= 5; i++) {
+		if(!isChannelAllowed(message)) return
+
+		let verse = "**Taylor Swift**: \n"
+		for(let i = 0; i < 5; i++) {
 			verse += markovFile(DATA_TAYLOR) + "\n"
 		}
 		message.channel.send(verse)
 	},
 	nevereverever: (commands, message) => {
-		if(message.channel.id != SHITPOST_CHANNEL_ID) return
+		if(!isChannelAllowed(message)) return
+
+		let length = 2000
 		let verse = ""
-		for(let i = 0; i <= 5; i++) {
-			verse += markovFile(DATA_TAYLOR) + "\n"
+
+		while(length >= 2000) {
+			verse = "**Taylor Swift**: \n"
+			for(let g = 0; g < 4; g++) {
+				for(let i = 0; i <= 5; i++) {
+					verse += markovFile(DATA_TAYLOR) + "\n"
+				}
+				verse += "\n"
+			}
+			length = verse.length
 		}
 		message.channel.send(verse)
 	}
 }
-
-
 
 module.exports = commands

@@ -55,5 +55,5 @@ client.on("message", m => {
 	}
 })
 client.on("ready", () => {
-	console.log("The Constable is ready to report NFA offenses.");
+	console.log("We are never ever getting back together.");
 })

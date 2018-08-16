@@ -1,12 +1,12 @@
 {
-  "name": "constable",
+  "name": "swiftbot",
   "version": "1.0.0",
   "description": "A bot for the /r/guns Discord",
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js"
   },
-  "repository": "https://github.com/trentv4/Constable",
+  "repository": "https://github.com/trentv4/SwiftBot",
   "keywords": [
     "discord",
     "bot"

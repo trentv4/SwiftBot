@@ -1,4 +1,4 @@
-# Constable #
+# SwiftBot #
 
 This is a Discord bot written in NodeJS. This bot is used on the /r/guns official Discord subreddit for shitposting purposes.
 
