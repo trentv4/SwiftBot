@@ -69,11 +69,11 @@ let commands = {
 			}).catch(e => console.log(e))
 		}
 	},
-	summary: {
+	mimic: {
 		meta: {
 			hidden: false,
 			category: "markov",
-			permissions: "all"
+			permissions: 0
 		}, 
 		execute: (commands, message) => {
 			// Only allowed in shitposting channel

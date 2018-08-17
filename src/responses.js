@@ -13,7 +13,7 @@ fs.readdirSync("data/lists").forEach(file => {
 		meta: {
 			hidden: false,
 			category: "responses",
-			permissions: "all"
+			permissions: 0
 		}, 
 		execute: (commands, message) => {
 			message.channel.send(data[cleanName][Math.floor(Math.random() * data[cleanName].length)])
@@ -25,7 +25,7 @@ commands.wutmeal = {
 	meta: {
 		hidden: false,
 		category: "responses",
-		permissions: "all"
+		permissions: 0
 	}, 
 	execute: (commands, message) => {
 		let eat = data.wuteat[Math.floor(Math.random() * data.wuteat.length)]
@@ -42,7 +42,7 @@ Object.keys(responsesList).forEach(response => {
 		meta: {
 			hidden: false,
 			category: "responses",
-			permissions: "all"
+			permissions: 0
 		}, 
 		execute: (commands, message) => {
 			message.channel.send(responsesList[response])
