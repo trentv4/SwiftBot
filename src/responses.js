@@ -10,7 +10,7 @@ fs.readdirSync("data/lists").forEach(file => {
 	let cleanName = file.substring(0, file.length-5)
 	data[cleanName] = JSON.parse(fs.readFileSync("data/lists/" + file, "utf-8"))
 	commands[cleanName] = (commands, message) => {
-		message.channel.send()
+		message.channel.send(data[cleanName][Math.floor(Math.random() * data[cleanName].length)])
 	}
 })
 
