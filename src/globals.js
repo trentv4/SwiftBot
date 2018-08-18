@@ -17,8 +17,9 @@ getPermissionLevel = (userID, guild) => {
 	let roles = user.roles.array()
 	let permLevel = 0
 	roles.forEach(e => {
-		if(e.id == 480216395205050368 || e.name == "mod")
-		permLevel = 1
+		if(e.id == 480216395205050368 || e.name == "mod" || e.name == "Jake") {
+			permLevel = 1
+		}
 	})
 
 	return permLevel

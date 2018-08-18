@@ -73,9 +73,10 @@ client.on("message", m => {
 		let currentCommand = commandList[command[0]]
 		if(currentCommand != null){
 			console.write("Running command by " + getUsername(m) + ": " + m.content + " ")
-			console.log()
 			if(currentCommand.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
 				currentCommand.execute(command.splice(1), m)
+			} else {
+				console.write("forbidden")
 			}
 		}
 		console.write("\n")
