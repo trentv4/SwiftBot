@@ -45,7 +45,7 @@ let commands = {
 	// Feeds a channel into a markov chain
 	summary: (commands, message) => {
 		// Only allowed in shitposting channel
-		if(!isChannelAllowed(message.channel.id)) return
+		if(!isChannelAllowed(message)) return
 
 		let channel = message.mentions.channels.first()
 		if(channel == undefined) {
@@ -60,13 +60,13 @@ let commands = {
 				filteredMessages.push(item.content)				
 			})
 
-			message.channel.send(markov(filteredMessages.join(" ")))
+			message.channel.send(markovFile(filteredMessages))
 		}).catch(e => console.log(e))
 	},
 	// Feeds a user into a markov chain
 	mimic: (commands, message) => {
 		// Only allowed in shitposting channel
-		if(!isChannelAllowed(message.channel.id)) return
+		if(!isChannelAllowed(message)) return
 
 		let target = undefined
 		try {
@@ -105,7 +105,7 @@ let commands = {
 					all.push(out[i][g])
 				}
 			}
-			message.channel.send(markov(all.join(" ")))
+			message.channel.send(markovFile(all))
 		}).catch(e => console.log(e))
 	}, 
 	//Hesalite triggers
