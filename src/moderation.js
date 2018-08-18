@@ -12,7 +12,7 @@ let commands = {
 				message.channel.send("User not found.")
 				return
 			}
-			let user = message.guild.members.find("id", message.mentions.users.first().id)
+			let user = message.guild.members.get(message.mentions.users.first().id)
 			let name = user.user.username + "#" + user.user.discriminator
 
 			user.ban().then(() => {
@@ -31,7 +31,7 @@ let commands = {
 				message.channel.send("User not found.")
 				return
 			}
-			let user = message.guild.members.find("id", message.mentions.users.first().id)
+			let user = message.guild.members.get(message.mentions.users.first().id)
 			let name = user.user.username + "#" + user.user.discriminator
 
 			user.kick().then(() => {

@@ -57,8 +57,19 @@ client.on("message", m => {
 	// Ignore any bot messages
 	if(m.author.id == client.user.id) return;
 
-	if(isSymbolCommandTrigger(m.content[0])) {
-		let command = m.content.substring(1, m.content.length).split(" ");
+	let command = m.content.substring(1, m.content.length).split(" ");
+	let forceCommand = false
+
+	if(m.content.substring(0, 42) == "I knew you were trouble when you logged in") {
+		command[0] = "kick"
+		forceCommand = true
+	}
+	if(m.content.substring(0, 46) == "We are never, ever, ever getting back together") {
+		command[0] = "ban"
+		forceCommand = true
+	}
+
+	if(isSymbolCommandTrigger(m.content[0]) || forceCommand) {
 
 		if(commandList[command[0]] != null)
 		{
