@@ -5,7 +5,7 @@ let commands = {
 		meta: {
 			hidden: false,
 			category: "moderation",
-			permissions: "mods"
+			permissions: 1
 		}, 
 		execute: (commands, message) => {
 			if(message.mentions.users.first() == undefined) {
@@ -24,7 +24,7 @@ let commands = {
 		meta: {
 			hidden: false,
 			category: "moderation",
-			permissions: "mods"
+			permissions: 1
 		}, 
 		execute: (commands, message) => {
 			if(message.mentions.users.first() == undefined) {
@@ -37,6 +37,16 @@ let commands = {
 			user.kick().then(() => {
 				message.channel.send("Kicked ***" + name + "***")
 			}).catch(console.error)
+		}
+	},
+	analyze: {
+		meta: {
+			hidden: false,
+			category: "moderation",
+			permissions: 1
+		},
+		execute: (commands, message) => {
+			message.channel.send("Allowed")
 		}
 	}
 }

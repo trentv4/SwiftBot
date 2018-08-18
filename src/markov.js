@@ -46,7 +46,7 @@ let commands = {
 		meta: {
 			hidden: false,
 			category: "markov",
-			permissions: "all"
+			permissions: 0
 		}, 
 		execute: (commands, message) => {
 			// Only allowed in shitposting channel
@@ -124,7 +124,7 @@ let commands = {
 		meta: {
 			hidden: false,
 			category: "markov",
-			permissions: "all"
+			permissions: 0
 		}, 
 		execute: (commands, message) => {
 			if(!isChannelAllowed(message)) return
@@ -152,7 +152,7 @@ let hesaliteCommand = {
 	meta: {
 		hidden: false,
 		category: "markov-hesalite",
-		permissions: "all"
+		permissions: 0
 	}, 
 	execute: (commands, message) => {
 		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
@@ -163,7 +163,7 @@ let olemisstexanCommand = {
 	meta: {
 		hidden: false,
 		category: "markov-olemisstexan",
-		permissions: "all"
+		permissions: 0
 	}, 
 	execute: (commands, message) => {
 		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
@@ -174,7 +174,7 @@ let taylorSwiftCommand = {
 	meta: {
 		hidden: false,
 		category: "markov-taytay",
-		permissions: "all"
+		permissions: 0
 	}, 
 	execute: (commands, message) => {
 		if(!isChannelAllowed(message)) return

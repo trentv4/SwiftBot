@@ -8,7 +8,7 @@ const commandList = {
 		meta: {
 			hidden: false,
 			category: "general",
-			permissions: "all"
+			permissions: 0
 		}, 
 		execute: (commands, message) => {
 			let cmdList = {}
@@ -70,11 +70,13 @@ client.on("message", m => {
 	}
 
 	if(isSymbolCommandTrigger(m.content[0]) || forceCommand) {
-
-		if(commandList[command[0]] != null)
-		{
+		let currentCommand = commandList[command[0]]
+		if(currentCommand != null){
 			console.write("Running command by " + getUsername(m) + ": " + m.content + " ")
-			commandList[command[0]].execute(command.splice(1), m)
+			console.log()
+			if(currentCommand.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
+				currentCommand.execute(command.splice(1), m)
+			}
 		}
 		console.write("\n")
 	}
