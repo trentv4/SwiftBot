@@ -42,132 +42,164 @@ function sendMarkovMessage(message, name, dataset, length) {
 }
 
 let commands = {
-	// Feeds a channel into a markov chain
-	summary: (commands, message) => {
-		// Only allowed in shitposting channel
-		if(!isChannelAllowed(message)) return
+	summary: {
+		meta: {
+			hidden: false,
+			category: "markov",
+			permissions: "all"
+		}, 
+		execute: (commands, message) => {
+			// Only allowed in shitposting channel
+			if(!isChannelAllowed(message)) return
 
-		let channel = message.mentions.channels.first()
-		if(channel == undefined) {
-			message.channel.send("Channel not found.")
-			return
-		}
-		channel.fetchMessages({limit: 10}).then(all => {
-			let filteredMessages = []
-			all.forEach(item => {
-				if(item.content == "") return
-				if(item.content[0] == "!") return
-				filteredMessages.push(item.content)				
-			})
-
-			message.channel.send(markovFile(filteredMessages))
-		}).catch(e => console.log(e))
-	},
-	// Feeds a user into a markov chain
-	mimic: (commands, message) => {
-		// Only allowed in shitposting channel
-		if(!isChannelAllowed(message)) return
-
-		let target = undefined
-		try {
-			target = message.mentions.users.first().id
-		} catch(e) {
-			return
-		}
-		let userLogs = []
-		let guild = message.channel.guild
-		let channels = guild.channels.array()
-
-		let promises = []
-
-		for(let i = 0; i < channels.length; i++) {
-			let channel = channels[i]
-			if(channel.type != "text") continue
-
-			promises.push(new Promise((resolve, reject) => {
-				channel.fetchMessages({limit: 100}).then(messages => {
-					let l = []
-					messages.forEach(message => {
-						if(message.author.id != target) return
-						if(message.content == "") return
-						if(message.content[0] == "!") return
-						l.push(message.content)
-					})
-					resolve(l)
+			let channel = message.mentions.channels.first()
+			if(channel == undefined) {
+				message.channel.send("Channel not found.")
+				return
+			}
+			channel.fetchMessages({limit: 10}).then(all => {
+				let filteredMessages = []
+				all.forEach(item => {
+					if(item.content == "") return
+					if(isSymbolCommandTrigger(item.content[0])) return
+					filteredMessages.push(item.content)				
 				})
-			}))
-		}
 
-		Promise.all(promises).then(out => {
-			let all = []
-			for(let i = 0; i < out.length; i++) {
-				for(let g = 0; g < out[i].length; g++) {
-					all.push(out[i][g])
-				}
+				message.channel.send(markovFile(filteredMessages))
+			}).catch(e => console.log(e))
+		}
+	},
+	summary: {
+		meta: {
+			hidden: false,
+			category: "markov",
+			permissions: "all"
+		}, 
+		execute: (commands, message) => {
+			// Only allowed in shitposting channel
+			if(!isChannelAllowed(message)) return
+
+			let target = undefined
+			try {
+				target = message.mentions.users.first().id
+			} catch(e) {
+				return
 			}
-			message.channel.send(markovFile(all))
-		}).catch(e => console.log(e))
+			let userLogs = []
+			let guild = message.channel.guild
+			let channels = guild.channels.array()
+
+			let promises = []
+
+			for(let i = 0; i < channels.length; i++) {
+				let channel = channels[i]
+				if(channel.type != "text") continue
+
+				promises.push(new Promise((resolve, reject) => {
+					channel.fetchMessages({limit: 100}).then(messages => {
+						let l = []
+						messages.forEach(message => {
+							if(message.author.id != target) return
+							if(message.content == "") return
+							if(isSymbolCommandTrigger(message.content[0])) return
+							l.push(message.content)
+						})
+						resolve(l)
+					})
+				}))
+			}
+
+			Promise.all(promises).then(out => {
+				let all = []
+				for(let i = 0; i < out.length; i++) {
+					for(let g = 0; g < out[i].length; g++) {
+						all.push(out[i][g])
+					}
+				}
+				message.channel.send(markovFile(all))
+			}).catch(e => console.log(e))
+		}
+	},
+	nevereverever: {
+		meta: {
+			hidden: false,
+			category: "markov",
+			permissions: "all"
+		}, 
+		execute: (commands, message) => {
+			if(!isChannelAllowed(message)) return
+
+			let length = 2000
+			let verse = ""
+
+			while(length >= 2000) {
+				verse = "**Taylor Swift**: \n"
+				for(let g = 0; g < 4; g++) {
+					for(let i = 0; i < 4; i++) {
+						verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
+					}
+					verse += "\n"
+				}
+				length = verse.length
+			}
+			message.channel.send(verse)
+		}
+	}
+
+}
+
+let hesaliteCommand = {
+	meta: {
+		hidden: false,
+		category: "markov-hesalite",
+		permissions: "all"
 	}, 
-	//Hesalite triggers
-	dog: (commands, message) => {
+	execute: (commands, message) => {
 		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
-	},
-	girlfriend: (commands, message) => {
-		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
-	},
-	BAR: (commands, message) => {
-		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
-	},
-	FNMilitaryCollector: (commands, message) => {
-		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
-	},
-	// OleMissTexan triggers
-	serve: (commands, message) => {
+	}
+}
+
+let olemisstexanCommand = {
+	meta: {
+		hidden: false,
+		category: "markov-olemisstexan",
+		permissions: "all"
+	}, 
+	execute: (commands, message) => {
 		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
-	},
-	oink: (commands, message) => {
-		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
-	},
-	protect: (commands, message) => {
-		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
-	},
-	// Taylor Swift triggers
-	basicbitch: (commands, message) => {
+	}
+}
+
+let taylorSwiftCommand = {
+	meta: {
+		hidden: false,
+		category: "markov-taytay",
+		permissions: "all"
+	}, 
+	execute: (commands, message) => {
 		if(!isChannelAllowed(message)) return
 
 		let verse = "**Taylor Swift**: \n"
 		for(let i = 0; i < 4; i++) {
 			verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
-		}
-		message.channel.send(verse)
-	},
-	starbucks: (commands, message) => {
-		if(!isChannelAllowed(message)) return
-
-		let verse = "**Taylor Swift**: \n"
-		for(let i = 0; i < 4; i++) {
-			verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
-		}
-		message.channel.send(verse)
-	},
-	nevereverever: (commands, message) => {
-		if(!isChannelAllowed(message)) return
-
-		let length = 2000
-		let verse = ""
-
-		while(length >= 2000) {
-			verse = "**Taylor Swift**: \n"
-			for(let g = 0; g < 4; g++) {
-				for(let i = 0; i < 4; i++) {
-					verse += markovFile(DATA_TAYLOR, Math.floor((Math.random() * 10) + 10)) + "\n"
-				}
-				verse += "\n"
-			}
-			length = verse.length
 		}
 		message.channel.send(verse)
 	}
 }
+
+commands.dog = hesaliteCommand
+commands.BAR = hesaliteCommand
+commands.girlfriend = hesaliteCommand
+commands.FNMilitaryCollector = hesaliteCommand
+
+commands.protect = olemisstexanCommand
+commands.serve = olemisstexanCommand
+commands.oink = olemisstexanCommand
+commands.donut = olemisstexanCommand
+
+commands.basicbitch = taylorSwiftCommand
+commands.starbucks = taylorSwiftCommand
+commands.pumpkinspice = taylorSwiftCommand
+commands.uggs = taylorSwiftCommand
 
 module.exports = commands

@@ -1,18 +1,40 @@
+require(__dirname + "/globals.js")
 const fs = require("fs")
 const client = new (require("discord.js")).Client( { autoReconnect: true } );
 
 // This is the global commandList that other commands are added to.
 const commandList = {
-	commands: (commands, message) => {
-		let cmdList = []
-		Object.keys(commandList).forEach(command => { cmdList.push(command)	})
-		message.channel.send("**Commands**: \n" + cmdList.join(", "))
-	}
-}
+	commands: {
+		meta: {
+			hidden: false,
+			category: "general",
+			permissions: "all"
+		}, 
+		execute: (commands, message) => {
+			let cmdList = {}
+			Object.keys(commandList).forEach(command => {
+				let actualCommand = commandList[command]
 
-// Console.log without the trailing \n
-console.write = (message) => {
-	process.stdout.write(message);
+				if(actualCommand.meta.hidden == true) 
+					return
+				if(cmdList[actualCommand.meta.category] == undefined) 
+					cmdList[actualCommand.meta.category] = []
+
+				cmdList[actualCommand.meta.category].push(command)
+			})
+
+			let output = ""
+
+			Object.keys(cmdList).forEach(cat => {
+				output += "**" + cat + "**: \n"
+				Object.keys(cmdList[cat]).forEach(command => {
+					output += cmdList[cat][command] + ", "
+				})
+				output = output.substring(0, output.length-2) + "\n"
+			})
+			message.channel.send(output)
+		}
+	}
 }
 
 // Loads from an external file that contains specific commands.
@@ -23,13 +45,9 @@ function apply(target) {
 	})
 }
 
-// Gets the nickname if available, or defaults to username if not.
-function getUsername(message) {
-	return message.member.nickname == null ? message.author.username : message.member.nickname;
-}
-
 apply(require(__dirname + "/markov.js"))
 apply(require(__dirname + "/responses.js"))
+apply(require(__dirname + "/moderation.js"))
 
 console.write("Connecting... ");
 
@@ -39,21 +57,18 @@ client.on("message", m => {
 	// Ignore any bot messages
 	if(m.author.id == client.user.id) return;
 
-	// Ignore any messages that don't have "!" or "%", etc as the start of the message
-	// "!" for normal commands, "%;~" for special markov commands. In reality, any of
-	// these will work, but this preserves familiarity to the old commands. ex. "%protect"
-	// will work just as well as "!protect" or ";protect". 
-	if(m.content[0] == "!" || m.content[0] == "%" || m.content[0] == ";" || m.content[0] == "~") {
+	if(isSymbolCommandTrigger(m.content[0])) {
 		let command = m.content.substring(1, m.content.length).split(" ");
 
 		if(commandList[command[0]] != null)
 		{
-			console.write("Running command by " + getUsername(m) + ": " + m.content + "   ")
-			commandList[command[0]](command.splice(1), m)
+			console.write("Running command by " + getUsername(m) + ": " + m.content + " ")
+			commandList[command[0]].execute(command.splice(1), m)
 		}
 		console.write("\n")
 	}
 })
+
 client.on("ready", () => {
 	console.log("We are never ever getting back together.");
 })
