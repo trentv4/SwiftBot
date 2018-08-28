@@ -43,28 +43,6 @@ const commandList = {
 		}, 
 		execute: (commands, message) => {
 			let user = message.author
-			console.log(user)
-			message.channel.send({embed: {
-				color: 3447003,
-				author: {
-					name: "Ban | " + user.username + "#" + user.discriminator,
-					icon_url: user.avatarURL
-				},
-				fields: [{
-					name: "User",
-					value: user.toString(),
-					inline: true
-				}, {
-					name: "Moderator",
-					value: "AAAAAAAAA",
-					inline: true
-				}, {
-					name: "Reason",
-					value: "BBBBBBBBBB",
-					inline: true
-				}],
-				timestamp: new Date(),
-			}})
 		}
 	}	
 }

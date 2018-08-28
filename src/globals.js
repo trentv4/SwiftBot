@@ -25,4 +25,6 @@ getPermissionLevel = (userID, guild) => {
 	return permLevel
 }
 
+USER_IN_AND_OUT_ID = "483891990388539393"
+MOD_LOGS_ID = "483892001025032193"
 messageBuffer = []

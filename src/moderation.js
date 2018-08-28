@@ -17,7 +17,18 @@ let commands = {
 
 			user.ban().then(() => {
 				message.channel.send(":white_check_mark: Banned ***" + name + "***")
-				message.channel.send({embed: {
+
+				message.channel.guild.channels.get(USER_IN_AND_OUT_ID).send({embed: {
+					color: 3447003,
+					description: user.toString() + " " + user.user.username + "#" + user.user.discriminator,
+					author: {
+						name: "Member Banned",
+						icon_url: user.user.avatarURL
+					},
+					timestamp: new Date(),
+				}})
+
+				message.channel.guild.channels.get(MOD_LOGS_ID).send({embed: {
 					color: 3447003,
 					author: {
 						name: "Ban | " + user.user.username + "#" + user.user.discriminator,
@@ -59,7 +70,18 @@ let commands = {
 
 			user.kick().then(() => {
 				message.channel.send(":white_check_mark: Kicked ***" + name + "***")
-				message.channel.send({embed: {
+
+				message.channel.guild.channels.get(USER_IN_AND_OUT_ID).send({embed: {
+					color: 3447003,
+					description: user.toString() + " " + user.user.username + "#" + user.user.discriminator,
+					author: {
+						name: "Member Kicked",
+						icon_url: user.user.avatarURL
+					},
+					timestamp: new Date(),
+				}})
+
+				message.channel.guild.channels.get(MOD_LOGS_ID).send({embed: {
 					color: 3447003,
 					author: {
 						name: "Kick | " + user.user.username + "#" + user.user.discriminator,
