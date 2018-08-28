@@ -1,8 +1,6 @@
 const markov = require("markovchain")
 const fs = require("fs")
 
-// Change to appropriate shitposting hole while in developer mode
-const SHITPOST_CHANNEL_ID = 478663825910923274
 // Constant data that is loaded from files and never changes.
 const DATA_HESALITE = JSON.parse(fs.readFileSync("data/hesalite.json"))
 const DATA_OLEMISSTEXAN = JSON.parse(fs.readFileSync("data/olemisstexan.json"))
@@ -32,7 +30,7 @@ function markovFile(dataset, length) {
 }
 
 function isChannelAllowed(message) {
-	return message.channel.id == SHITPOST_CHANNEL_ID || message.guild.id == 478602305302954000;
+	return message.channel.id == SHITPOST_ID || message.guild.id == 478602305302954000;
 }
 
 function sendMarkovMessage(message, name, dataset, length) {
@@ -43,11 +41,7 @@ function sendMarkovMessage(message, name, dataset, length) {
 
 let commands = {
 	summary: {
-		meta: {
-			hidden: false,
-			category: "markov",
-			permissions: 0
-		}, 
+		meta: META_MARKOV, 
 		execute: (commands, message) => {
 			// Only allowed in shitposting channel
 			if(!isChannelAllowed(message)) return
@@ -70,11 +64,7 @@ let commands = {
 		}
 	},
 	mimic: {
-		meta: {
-			hidden: false,
-			category: "markov",
-			permissions: 0
-		}, 
+		meta: META_MARKOV, 
 		execute: (commands, message) => {
 			// Only allowed in shitposting channel
 			if(!isChannelAllowed(message)) return
@@ -121,11 +111,7 @@ let commands = {
 		}
 	},
 	nevereverever: {
-		meta: {
-			hidden: false,
-			category: "markov",
-			permissions: 0
-		}, 
+		meta: META_MARKOV_TAYTAY, 
 		execute: (commands, message) => {
 			if(!isChannelAllowed(message)) return
 
@@ -149,33 +135,21 @@ let commands = {
 }
 
 let hesaliteCommand = {
-	meta: {
-		hidden: false,
-		category: "markov-hesalite",
-		permissions: 0
-	}, 
+	meta: META_MARKOV_HESALITE, 
 	execute: (commands, message) => {
 		sendMarkovMessage(message, "Hesalite", DATA_HESALITE)
 	}
 }
 
 let olemisstexanCommand = {
-	meta: {
-		hidden: false,
-		category: "markov-olemisstexan",
-		permissions: 0
-	}, 
+	meta: META_MARKOV_OLEMISSTEXAN, 
 	execute: (commands, message) => {
 		sendMarkovMessage(message, "OleMissTexan", DATA_OLEMISSTEXAN)
 	}
 }
 
 let taylorSwiftCommand = {
-	meta: {
-		hidden: false,
-		category: "markov-taytay",
-		permissions: 0
-	}, 
+	meta: META_MARKOV_TAYTAY, 
 	execute: (commands, message) => {
 		if(!isChannelAllowed(message)) return
 

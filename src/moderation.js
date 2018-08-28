@@ -2,11 +2,7 @@ const fs = require("fs")
 
 let commands = {
 	ban: {
-		meta: {
-			hidden: false,
-			category: "moderation",
-			permissions: 1
-		}, 
+		meta: META_MODERATOR, 
 		execute: (commands, message) => {
 			if(message.mentions.users.first() == undefined) {
 				message.channel.send(":x: **User not found.**")
@@ -55,11 +51,7 @@ let commands = {
 		}
 	},
 	kick: {
-		meta: {
-			hidden: false,
-			category: "moderation",
-			permissions: 1
-		}, 
+		meta: META_MODERATOR, 
 		execute: (commands, message) => {
 			if(message.mentions.users.first() == undefined) {
 				message.channel.send(":x: **User not found.**")
@@ -105,6 +97,34 @@ let commands = {
 			}).catch(() => {
 				message.channel.send(":x: **Not allowed to kick user.**")
 			})
+		}
+	},
+	mute: {
+		meta: META_MODERATOR, 
+		execute: (commands, message) => {
+			if(message.mentions.users.first() == undefined) {
+				message.channel.send(":x: **User not found.**")
+				return
+			}
+
+			let user = message.guild.members.get(message.mentions.users.first().id)
+			let name = user.user.username + "#" + user.user.discriminator
+
+			//user.addRole(mute)
+		}
+	},
+	unmute: {
+		meta: META_MODERATOR, 
+		execute: (commands, message) => {
+			if(message.mentions.users.first() == undefined) {
+				message.channel.send(":x: **User not found.**")
+				return
+			}
+
+			let user = message.guild.members.get(message.mentions.users.first().id)
+			let name = user.user.username + "#" + user.user.discriminator
+
+			//user.addRole(mute)
 		}
 	}
 }

@@ -5,11 +5,7 @@ const client = new (require("discord.js")).Client( { autoReconnect: true } );
 // This is the global commandList that other commands are added to.
 const commandList = {
 	commands: {
-		meta: {
-			hidden: false,
-			category: "general",
-			permissions: 0
-		}, 
+		meta: META_GENERAL,
 		execute: (commands, message) => {
 			let cmdList = {}
 			Object.keys(commandList).forEach(command => {
@@ -36,11 +32,7 @@ const commandList = {
 		}
 	},
 	test: {
-		meta: {
-			hidden: false,
-			category: "general",
-			permissions: 0
-		}, 
+		meta: META_GENERAL, 
 		execute: (commands, message) => {
 			let user = message.author
 		}
@@ -90,6 +82,7 @@ client.on("message", m => {
 
 	if(command != null) {
 		if(command.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
+			console.write("Running command by " + getUsername(m) + ": " + m.content + "   ")
 			command.execute(m.content.substring(1, m.content.length).split(" ").splice(1), m)
 			console.write("\n")
 		} else {
