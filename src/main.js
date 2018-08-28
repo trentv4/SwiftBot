@@ -34,7 +34,39 @@ const commandList = {
 			})
 			message.channel.send(output)
 		}
-	}
+	},
+	test: {
+		meta: {
+			hidden: false,
+			category: "general",
+			permissions: 0
+		}, 
+		execute: (commands, message) => {
+			let user = message.author
+			console.log(user)
+			message.channel.send({embed: {
+				color: 3447003,
+				author: {
+					name: "Ban | " + user.username + "#" + user.discriminator,
+					icon_url: user.avatarURL
+				},
+				fields: [{
+					name: "User",
+					value: user.toString(),
+					inline: true
+				}, {
+					name: "Moderator",
+					value: "AAAAAAAAA",
+					inline: true
+				}, {
+					name: "Reason",
+					value: "BBBBBBBBBB",
+					inline: true
+				}],
+				timestamp: new Date(),
+			}})
+		}
+	}	
 }
 
 // Loads from an external file that contains specific commands.
@@ -81,14 +113,15 @@ client.on("message", m => {
 	if(command != null) {
 		if(command.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
 			command.execute(m.content.substring(1, m.content.length).split(" ").splice(1), m)
+			console.write("\n")
 		} else {
-			console.write("forbidden.")
+			console.write("forbidden.\n")
 		}
 	}
-
-	console.write("\n")
 })
 
 client.on("ready", () => {
 	console.log("We are never ever getting back together.")
 })
+
+require(__dirname + "/events.js")(client)
