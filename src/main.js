@@ -45,44 +45,50 @@ function apply(target) {
 	})
 }
 
+function getCommand(raw) {
+	if(raw.content.substring(0, 42).toLowerCase() == "i knew you were trouble when you logged in") {
+		return commandList["kick"]
+	}
+	if(raw.content.substring(0, 46).toLowerCase() == "we are never, ever, ever getting back together") {
+		return commandList["ban"]
+	}
+
+	let splitCommand = raw.content.substring(1, raw.content.length).split(" ")
+
+	if(isSymbolCommandTrigger(raw.content[0])) {
+		if(commandList[splitCommand[0]] != null) {
+			return commandList[splitCommand[0]]
+		}
+	}
+
+	return undefined
+}
+
 apply(require(__dirname + "/markov.js"))
 apply(require(__dirname + "/responses.js"))
 apply(require(__dirname + "/moderation.js"))
 
-console.write("Connecting... ");
+console.write("Connecting... ")
 
-client.login(fs.readFileSync("token.txt", "utf-8").replace(/\r?\n|\r/g, ''));
+client.login(fs.readFileSync("token.txt", "utf-8").replace(/\r?\n|\r/g, ''))
 client.on('error', console.error)
 client.on("message", m => {
 	// Ignore any bot messages
-	if(m.author.id == client.user.id) return;
+	if(m.author.id == client.user.id) return
 
-	let command = m.content.substring(1, m.content.length).split(" ");
-	let forceCommand = false
+	let command = getCommand(m)
 
-	if(m.content.substring(0, 42) == "I knew you were trouble when you logged in") {
-		command[0] = "kick"
-		forceCommand = true
-	}
-	if(m.content.substring(0, 46) == "We are never, ever, ever getting back together") {
-		command[0] = "ban"
-		forceCommand = true
-	}
-
-	if(isSymbolCommandTrigger(m.content[0]) || forceCommand) {
-		let currentCommand = commandList[command[0]]
-		if(currentCommand != null){
-			console.write("Running command by " + getUsername(m) + ": " + m.content + " ")
-			if(currentCommand.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
-				currentCommand.execute(command.splice(1), m)
-			} else {
-				console.write("forbidden")
-			}
+	if(command != null) {
+		if(command.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
+			command.execute(m.content.substring(1, m.content.length).split(" ").splice(1), m)
+		} else {
+			console.write("forbidden.")
 		}
-		console.write("\n")
 	}
+
+	console.write("\n")
 })
 
 client.on("ready", () => {
-	console.log("We are never ever getting back together.");
+	console.log("We are never ever getting back together.")
 })

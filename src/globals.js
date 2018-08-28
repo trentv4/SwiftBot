@@ -24,3 +24,5 @@ getPermissionLevel = (userID, guild) => {
 
 	return permLevel
 }
+
+messageBuffer = []
