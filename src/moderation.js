@@ -1,5 +1,27 @@
 const fs = require("fs")
 
+function getTimeFromInput(input) {
+	if(input == undefined) return -1
+	let modifier = input[input.length-1]
+	let val = input.substring(0, input.length-1)
+
+	if(modifier != "d" && modifier != "h" && modifier != "m" && modifier != "s") {
+		modifier = "s" 
+		val = input
+	}
+
+	if(isNaN(val)) return -1
+
+	switch(modifier) {
+		case "d": val *= 24
+		case "h": val *= 60
+		case "m": val *= 60
+		case "s": val *= 1000
+	}
+
+	return val
+}
+
 let commands = {
 	ban: {
 		meta: META_MODERATOR, 
@@ -8,6 +30,15 @@ let commands = {
 				message.channel.send(":x: **User not found.**")
 				return
 			}
+
+			let time = 0
+			if(commands[1] != undefined) time = getTimeFromInput(commands[1])
+
+			if(time == -1) {
+				message.channel.send(":x: **Invalid time specified.**")
+				return
+			}
+
 			let user = message.guild.members.get(message.mentions.users.first().id)
 			let name = user.user.username + "#" + user.user.discriminator
 
@@ -45,6 +76,12 @@ let commands = {
 					}],
 					timestamp: new Date(),
 				}})
+
+				if(time > 0) {
+					setTimeout(() => {
+						message.channel.guild.unban(user.id).catch(console.error)
+					}, time)
+				}
 			}).catch(() => {
 				message.channel.send(":x: **Not allowed to ban user.**")
 			})
@@ -104,6 +141,14 @@ let commands = {
 		execute: (commands, message) => {
 			if(message.mentions.users.first() == undefined) {
 				message.channel.send(":x: **User not found.**")
+				return
+			}
+
+			let time = 0
+			if(commands[1] != undefined) time = getTimeFromInput(commands[1])
+
+			if(time == -1) {
+				message.channel.send(":x: **Invalid time specified.**")
 				return
 			}
 
