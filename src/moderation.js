@@ -107,10 +107,15 @@ let commands = {
 				return
 			}
 
+			let role = message.guild.roles.find(e => e.name == "Muted")
 			let user = message.guild.members.get(message.mentions.users.first().id)
-			let name = user.user.username + "#" + user.user.discriminator
+			user.addRole(role)
 
-			//user.addRole(mute)
+			if(time > 0) {
+				setTimeout(() => {
+					user.removeRole(role)
+				}, time)
+			}
 		}
 	},
 	unmute: {
@@ -121,10 +126,9 @@ let commands = {
 				return
 			}
 
+			let role = message.guild.roles.find(e => e.name == "Muted")
 			let user = message.guild.members.get(message.mentions.users.first().id)
-			let name = user.user.username + "#" + user.user.discriminator
-
-			//user.addRole(mute)
+			user.removeRole(role)
 		}
 	}
 }
