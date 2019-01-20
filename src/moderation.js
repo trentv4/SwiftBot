@@ -175,6 +175,31 @@ let commands = {
 			let user = message.guild.members.get(message.mentions.users.first().id)
 			user.removeRole(role)
 		}
+	},
+	get_messages: {
+		meta: META_MODERATOR,
+		execute: (commands, message) => {
+			let lastMessages = ""
+
+			message.channel.fetchMessages({limit: 5}).then(all => {
+				let messages = all.array()
+				let formatted = ""
+				for(let i = messages.length-1; i >= 0; i--) {
+					let e = messages[i]			
+					let date = e.createdAt
+					let dateString = date.getFullYear() + "/" + (date.getMonth()+1) + "/" + date.getDate() + "-"
+
+					dateString += (date.getHours()+"".length == 1 ? "0" + date.getHours()  :  date.getHours()) + ":"
+					dateString += (date.getMinutes()+"".length == 1 ? "0" + date.getMinutes()  :  date.getMinutes())
+
+					formatted += "[" + dateString + "] "
+					formatted += "**" + e.author + "**: "
+					formatted += e.content + "\n"
+				}
+
+				message.channel.send(formatted)
+			}).catch(e => console.error)
+		}
 	}
 }
 

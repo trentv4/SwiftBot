@@ -9,7 +9,7 @@ getUsername = (message) => {
 }
 
 isSymbolCommandTrigger = (symbol) => {
-	return (symbol == "!" || symbol == "%" || symbol == ";" || symbol == "~")
+	return (symbol == "=")
 }
 
 getPermissionLevel = (userID, guild) => {

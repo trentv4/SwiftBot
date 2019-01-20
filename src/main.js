@@ -35,6 +35,20 @@ const commandList = {
 		meta: META_GENERAL, 
 		execute: (commands, message) => {
 			let user = message.author
+
+			let channel = message.mentions.channels.first()
+			if(channel == undefined) {
+				message.channel.send("Channel not found.")
+				return
+			}
+			channel.fetchMessages({limit: 100}).then(all => {
+				let t = ""
+				all.forEach(i => {
+					t += i.content + "\n"
+				})
+				fs.writeFileSync("output.txt", t)
+
+			}).catch(e => console.log(e))
 		}
 	}	
 }
@@ -48,12 +62,14 @@ function apply(target) {
 }
 
 function getCommand(raw) {
+	/*
 	if(raw.content.substring(0, 42).toLowerCase() == "i knew you were trouble when you logged in") {
 		return commandList["kick"]
 	}
 	if(raw.content.substring(0, 46).toLowerCase() == "we are never, ever, ever getting back together") {
 		return commandList["ban"]
 	}
+	*/
 
 	let splitCommand = raw.content.substring(1, raw.content.length).split(" ")
 
@@ -68,7 +84,7 @@ function getCommand(raw) {
 
 apply(require(__dirname + "/markov.js"))
 apply(require(__dirname + "/responses.js"))
-apply(require(__dirname + "/moderation.js"))
+//apply(require(__dirname + "/moderation.js"))
 
 console.write("Connecting... ")
 
