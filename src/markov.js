@@ -30,7 +30,7 @@ function markovFile(dataset, length) {
 }
 
 function isChannelAllowed(message) {
-	return message.channel.id == SHITPOST_ID || message.guild.id == 478602305302954000;
+	return message.channel.id == SHITPOST_ID || message.guild.id == 478602305302954000 || message.channel.id == 471512686103101470 || message.channel.id = 263733022749229057;
 }
 
 function sendMarkovMessage(message, name, dataset, length) {
