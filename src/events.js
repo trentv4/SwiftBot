@@ -2,6 +2,7 @@ const fs = require("fs")
 
 function initialize(client) {
 	client.on("guildMemberAdd", (member) => {
+		return;
 		let user = member.user
 
 		member.guild.channels.get(USER_IN_AND_OUT_ID).send({embed: {
@@ -15,6 +16,7 @@ function initialize(client) {
 		}})
 	})
 	client.on("guildMemberRemove", (member) => {
+		return;
 		let user = member.user
 		member.guild.channels.get(USER_IN_AND_OUT_ID).send({embed: {
 			color: 3447003,
