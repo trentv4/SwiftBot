@@ -1,5 +1,9 @@
 const fs = require("fs")
 
+const USER_IN_AND_OUT_ID = "483891990388539393"
+const MOD_LOGS_ID = "483892001025032193"
+const SHITPOST_ID = "478663825910923274"
+
 function getTimeFromInput(input) {
 	if(input == undefined) return -1
 	let modifier = input[input.length-1]
@@ -202,5 +206,35 @@ let commands = {
 		}
 	}
 }
+
+/*
+client.on("guildMemberAdd", (member) => {
+	return;
+	let user = member.user
+
+	member.guild.channels.get(USER_IN_AND_OUT_ID).send({embed: {
+		color: 3447003,
+		description: user.toString() + " " + user.username + "#" + user.discriminator,
+		author: {
+			name: "Member Joined",
+			icon_url: user.avatarURL
+		},
+		timestamp: new Date(),
+	}})
+})
+client.on("guildMemberRemove", (member) => {
+	return;
+	let user = member.user
+	member.guild.channels.get(USER_IN_AND_OUT_ID).send({embed: {
+		color: 3447003,
+		description: user.toString() + " " + user.username + "#" + user.discriminator,
+		author: {
+			name: "Member Left",
+			icon_url: user.avatarURL
+		},
+		timestamp: new Date(),
+	}})
+})
+*/
 
 module.exports = commands

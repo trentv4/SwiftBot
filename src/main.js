@@ -30,27 +30,7 @@ const commandList = {
 			})
 			message.channel.send(output)
 		}
-	},
-	test: {
-		meta: META_GENERAL, 
-		execute: (commands, message) => {
-			let user = message.author
-
-			let channel = message.mentions.channels.first()
-			if(channel == undefined) {
-				message.channel.send("Channel not found.")
-				return
-			}
-			channel.fetchMessages({limit: 100}).then(all => {
-				let t = ""
-				all.forEach(i => {
-					t += i.content + "\n"
-				})
-				fs.writeFileSync("output.txt", t)
-
-			}).catch(e => console.log(e))
-		}
-	}	
+	}
 }
 
 // Loads from an external file that contains specific commands.
@@ -110,5 +90,3 @@ client.on("message", m => {
 client.on("ready", () => {
 	console.log("We are never ever getting back together.")
 })
-
-require(__dirname + "/events.js")(client)
