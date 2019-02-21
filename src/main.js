@@ -77,13 +77,9 @@ client.on("message", m => {
 	let command = getCommand(m)
 
 	if(command != null) {
-		if(command.meta.permissions <= getPermissionLevel(m.member.id, m.guild)) {
-			console.write("Running command by " + getUsername(m) + ": " + m.content + "   ")
-			command.execute(m.content.substring(1, m.content.length).split(" ").splice(1), m)
-			console.write("\n")
-		} else {
-			console.write("forbidden.\n")
-		}
+		console.write("Running command by " + getUsername(m) + ": " + m.content + "   ")
+		command.execute(m.content.substring(1, m.content.length).split(" ").splice(1), m)
+		console.write("\n")
 	}
 })
 
