@@ -9,7 +9,7 @@ let commands = {
 	add: {
 		meta: META_RESPONSES,
 		execute: (commandsExec, message) => {
-			if(getPermissionLevel(message.member) < 1) {
+			if(getPermissionLevel(message.member) < 3) {
 				message.channel.send(":x: Not enough permissions")
 				return
 			}
@@ -47,19 +47,27 @@ let commands = {
 	remove: {
 		meta: META_RESPONSES,
 		execute: (commandsExec, message) => {
-			if(getPermissionLevel(message.member) < 1) {
+			if(getPermissionLevel(message.member) < 3) {
 				message.channel.send(":x: Not enough permissions")
 				return
 			}
 
 			let entry = message.content.substring(9 + commandsExec[0].length)
 
-			if(commandsExec[0] == null || entry.length == 0) {
+			if(commandsExec[0] == null) {
 				message.channel.send(":x: **Improper usage. Format: =add [list] [entry]**")
 				return
 			}
 
 			let list = commandsExec[0]
+
+			if(entry.length == 0 && data[list] != null) {
+				console.log("test")
+				data[list] = null
+				commandList[list] = null
+				message.channel.send(`:white_check_mark: **Removed \`${list}\`**`)
+				return
+			}
 
 			if(data[list] == null) {
 				message.channel.send(":x: **Not a list**")
@@ -81,6 +89,11 @@ let commands = {
 	list: {
 		meta: META_RESPONSES,
 		execute: (commands, message) => {
+			if(getPermissionLevel(message.member) < 3) {
+				message.channel.send(":x: Not enough permissions")
+				return
+			}
+
 			if(commands[0] == null || data[commands[0]] == null) {
 				message.channel.send("**:x: List does not exist**")
 				return
