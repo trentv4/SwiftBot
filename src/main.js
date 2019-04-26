@@ -13,17 +13,14 @@ function apply(target) {
 function getCommand(raw) {
 	let splitCommand = raw.content.substring(1, raw.content.length).split(" ")
 
-	if(isSymbolCommandTrigger(raw.content[0])) {
-		if(commandList[splitCommand[0]] != null) {
-			return commandList[splitCommand[0]]
-		}
+	if(isSymbolCommandTrigger(raw.content[0]) && commandList[splitCommand[0]] != null) {
+		return commandList[splitCommand[0]]
 	}
 
 	return undefined
 }
 
-apply(require(__dirname + "/markov.js"))
-apply(require(__dirname + "/responses.js"))
+apply(require(__dirname + "/retorts.js"))
 
 console.write("Connecting... ")
 
@@ -34,11 +31,25 @@ client.on("message", m => {
 	if(m.author.id == client.user.id) return
 
 	let command = getCommand(m)
-
 	if(command != null) {
-		console.write("Running command by " + getUsername(m) + ": " + m.content + "   ")
-		command.execute(m.content.substring(1, m.content.length).split(" ").splice(1), m)
+		if(command.meta.whitelist.length > 0 && !command.meta.whitelist.includes(m.channel.id)) { return }
+		if(command.meta.permission > getPermissionLevel(m.member)) { return }
+
+		console.write(`Running command by ${getUsername(m)}: ${m.content}`)
+		command.execute(
+			m.content.substring(1, m.content.length).split(" ").splice(1), 
+			m, 
+			(output) => { m.channel.send(output) }
+		)
 		console.write("\n")
+		return
+	}
+
+	let retort = retortList[m.content.substring(1, m.content.length)]
+	if(retort != null) {
+		if(retort.whitelist.length > 0 && !retort.whitelist.includes(m.channel.id)) { return }
+
+		m.channel.send(retort.responses[Math.floor(Math.random() * retort.responses.length)])
 	}
 })
 
