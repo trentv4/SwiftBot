@@ -46,7 +46,7 @@ client.on("message", m => {
 	}
 
 	let retort = retortList[m.content.substring(1, m.content.length)]
-	if(retort != null) {
+	if(retort != null && isSymbolCommandTrigger(m.content[0])) {
 		if(retort.whitelist.length > 0 && !retort.whitelist.includes(m.channel.id)) { return }
 
 		m.channel.send(retort.responses[Math.floor(Math.random() * retort.responses.length)])

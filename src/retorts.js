@@ -17,7 +17,21 @@ let commands = {
 		},
 		execute: (commands, message) => {
 			if(commands[0] == "help") {
-				// send help message
+				message.channel.send(
+				`**usage: retortconfig** <help / show / add / del> [args]
+				help: 
+					shows this help message
+				show <retort>:
+					shows all available information (whitelist, responses) for a given retort
+				add <retort>:
+					adds a blank retort with no whitelist and no responses
+				add <retort> <whitelist / response> <content>
+					adds an entry to the whitelist or responses of an existing retort
+				del <retort>:
+					deletes a retort
+				del <retort> <whitelist / response> <content>
+					deletes an entry from the whitelist or responses of an existing retort`)
+				return
 			}
 
 			if(commands[0] == "show") {
@@ -28,6 +42,7 @@ let commands = {
 				}
 
 				message.channel.send(`**"${commands[1]}":**\n**Whitelist:** ${retort.whitelist == null ? "All" : retort.whitelist.join(", ")}\n**Responses:**${retort.responses.join(", ")}`)
+				return
 			}
 
 			let retort = commands[1]
