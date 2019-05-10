@@ -10,5 +10,9 @@
 	"x": {
 		"whitelist": [],
 		"responses": ["https://i.imgur.com/A2B0rnN.png"]
+	},
+	"dragonbbq": {
+		"whitelist": [],
+		"responses": ["https://i.imgur.com/LJ4HLNZ.png"]
 	}
 }
