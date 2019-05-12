@@ -14,5 +14,9 @@
 	"dragonbbq": {
 		"whitelist": [],
 		"responses": ["https://i.imgur.com/LJ4HLNZ.png"]
+	},
+	"tikka": {
+		"whitelist": [],
+		"responses": ["https://i.imgur.com/aJS28DZ.png"]
 	}
 }
