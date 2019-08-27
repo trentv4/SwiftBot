@@ -5,9 +5,9 @@ console.write = (message) => {
 
 w = console.log
 
-ROLE_ANTI_SHITPOST =     { id: 309851110829457410, level: 1}
-ROLE_SPECIAL_SNOWFLAKE = { id: 324349206531801089, level: 2}
-ROLE_SERVER_ADMINS =     { id: 263762720719896578, level: 3}
+ROLE_ANTI_SHITPOST =     { id: 615670092943982601, level: 1}
+ROLE_SPECIAL_SNOWFLAKE = { id: 615668089044074516, level: 2}
+ROLE_SERVER_ADMINS =     { id: 615668019598852120, level: 3}
 ROLE_SHAKE = {id: 478602305302954000, level: 4}
 
 // Gets the nickname if available, or defaults to username if not.
@@ -17,7 +17,7 @@ getUsername = (message) => {
 }
 
 isSymbolCommandTrigger = (symbol) => {
-	return (symbol == "=" || symbol == "+")
+	return (symbol == "=" || symbol == "+" || symbol == "!")
 }
 
 getPermissionLevel = (user) => {
@@ -39,34 +39,6 @@ META_GENERAL = {
 	whitelist: []
 }
 
-META_MARKOV = {
-	hidden: false,
-	category: "markov",
-	permissions: 0,
-	whitelist: []
-}
-
-META_MARKOV_HESALITE = {
-	hidden: false,
-	category: "markov-hesalite",
-	permissions: 0,
-	whitelist: []
-}
-
-META_MARKOV_OLEMISSTEXAN = {
-	hidden: false,
-	category: "markov-olemisstexan",
-	permissions: 0,
-	whitelist: []
-}
-
-META_MARKOV_TAYTAY = {
-	hidden: false,
-	category: "markov-taytay",
-	permissions: 0,
-	whitelist: []
-}
-
 META_RESPONSES = {
 	hidden: false,
 	category: "responses",
@@ -80,6 +52,8 @@ META_DEBUG = {
 	permissions: 0,
 	whitelist: []
 }
+
+require(__dirname + "/retorts.js")
 
 commandList = {
 	printchannelid: {
@@ -112,6 +86,12 @@ commandList = {
 				})
 				output = output.substring(0, output.length-2) + "\n"
 			})
+
+			output += "**retorts:**\n"
+			for(let item in retortList) {
+				output += item + ", "
+			}
+			console.log("\n")
 			message.channel.send(output)
 		}
 	}
