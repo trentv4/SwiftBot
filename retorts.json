@@ -39,6 +39,10 @@
 		"whitelist": [],
 		"responses": ["https://i.imgur.com/2RUvszk.png"]
 	},
+	"oldsie": {
+		"whitelist": [],
+		"responses": ["https://i.imgur.com/qbsfTMs.png"]
+	},
 	"hesalite": {
 		"whitelist": [],
 		"responses": ["https://media.discordapp.net/attachments/615700979123486721/615719757022232598/BARLOL2.png"]
