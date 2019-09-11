@@ -7,6 +7,10 @@
 		"whitelist": ["478663825910923274", "615700979123486721"],
 		"responses": ["Beer","MOAR BEER","Boone's Farm Fuzzy Navel","Wine you girl","Martin House Salty Lady","Blue yummy","BLUE DRANK http://i.imgur.com/Bcy16QG.jpg","Vodka","Scotch","Bourbon","Margaritas","CHILTON http://i.imgur.com/izZafvS.jpg","Jell-O shots","Cider","Vegas bomb","Gin","Glengoolie blue","Mike's Hard Lemonade you pansy ass","Mike's Harder Lemonade you slightly less pansy ass","Gasoline","Fat Tire","Zima","Flint city water","http://i.imgur.com/u3bapmH.jpg","Jägerbomb","RIOT JUICE http://i.imgur.com/lYUXY35.png","Bleach","High Life","Keystone","Everclear","Rum","Vodka tonic","Crown and Coke","Pond water","Edward 40 hands","Gin and tonic","Screwdriver","Tequila","Bartles & Jaymes","Box wine"]
 	},
+	"howfuck": {
+		"whitelist:" : ["478663825910923274"],
+		"responses": ["Missionary for the sole purpose of procreation", "Doggy","RAW doggy", "Cowgirl", "Reverse cowgirl", "Corkscrew", "Wheelbarrow", "Butter churner", "Table top", "Standing", "In the shower", "On the couch", "In the bed", "In the car", "In the library", "In the park", "In the woods", "Police officer roleplay", "Soldier roleplay"]
+	},
 	"x": {
 		"whitelist": [],
 		"responses": ["https://i.imgur.com/A2B0rnN.png"]
