@@ -33,7 +33,6 @@ client.on("message", m => {
 	let command = getCommand(m)
 	if(command != null) {
 		if(command.meta.whitelist.length > 0 && !command.meta.whitelist.includes(m.channel.id)) { return }
-		if(command.meta.permission > getPermissionLevel(m.member)) { return }
 
 		console.write(`Running command by ${getUsername(m)}: ${m.content}`)
 		command.execute(
@@ -45,11 +44,21 @@ client.on("message", m => {
 		return
 	}
 
-	let retort = retortList[m.content.substring(1, m.content.length)]
-	if(retort != null && isSymbolCommandTrigger(m.content[0])) {
-		if(retort.whitelist.length > 0 && !retort.whitelist.includes(m.channel.id)) { return }
+	let retort = retortCommands[m.content]
+	if(retort != null) {
+		if(retort.whitelist != null && retort.whitelist.length > 0 && !retort.whitelist.includes(""+m.channel.id)) { return }
 
-		m.channel.send(retort.responses[Math.floor(Math.random() * retort.responses.length)])
+		let text = retort.text.split("%")
+		let retortOutput = ""
+		for(let i = 0; i < text.length; i++) {
+			if(i % 2 == 0) {
+				retortOutput += text[i]
+			} else {
+				retortOutput += retortData[text[i]][random(retortData[text[i]].length)]
+			}
+		}
+
+		m.channel.send(retortOutput)
 	}
 })
 

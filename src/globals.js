@@ -3,34 +3,16 @@ console.write = (message) => {
 	process.stdout.write(message);
 }
 
-w = console.log
+random = (input) => {
+	return Math.floor(Math.random() * input);
+}
 
-ROLE_ANTI_SHITPOST =     { id: 615670092943982601, level: 1}
-ROLE_SPECIAL_SNOWFLAKE = { id: 615668089044074516, level: 2}
-ROLE_SERVER_ADMINS =     { id: 615668019598852120, level: 3}
-ROLE_SHAKE = {id: 478602305302954000, level: 4}
-
-// Gets the nickname if available, or defaults to username if not.
 getUsername = (message) => {
 	if(message.member == null) return "Unknown :shrug:"
 	return message.member.nickname == null ? message.author.username : message.member.nickname;
 }
 
-isSymbolCommandTrigger = (symbol) => {
-	return (symbol == "=" || symbol == "+" || symbol == "!")
-}
-
-getPermissionLevel = (user) => {
-	let roles = user.roles.array()
-	let maxPerm = 0
-	for(let i = 0; i < roles.length; i++) {
-		if(roles[i].id == ROLE_SHAKE.id && maxPerm < ROLE_SHAKE.level) maxPerm = ROLE_SHAKE.level
-		if(roles[i].id == ROLE_ANTI_SHITPOST.id && maxPerm < ROLE_ANTI_SHITPOST.level) maxPerm = ROLE_ANTI_SHITPOST.level
-		if(roles[i].id == ROLE_SPECIAL_SNOWFLAKE.id && maxPerm < ROLE_SPECIAL_SNOWFLAKE.level) maxPerm = ROLE_SPECIAL_SNOWFLAKE.level
-		if(roles[i].id == ROLE_SERVER_ADMINS.id && maxPerm < ROLE_SERVER_ADMINS.level && roles[i].hasPermission("MANAGE_GUILD")) maxPerm = ROLE_SERVER_ADMINS.level
-	}
-	return maxPerm
-}
+isSymbolCommandTrigger = (symbol) => { return symbol == "=" }
 
 META_GENERAL = {
 	hidden: false,
@@ -56,12 +38,6 @@ META_DEBUG = {
 require(__dirname + "/retorts.js")
 
 commandList = {
-	printchannelid: {
-		meta: META_DEBUG,
-		execute: (commands, message, send) => {
-			console.write(` ${message.channel.id}`)
-		}
-	},
 	commands: {
 		meta: META_GENERAL,
 		execute: (commands, message) => {
@@ -88,7 +64,7 @@ commandList = {
 			})
 
 			output += "**retorts:**\n"
-			for(let item in retortList) {
+			for(let item in retortCommands) {
 				output += item + ", "
 			}
 			console.log("\n")
