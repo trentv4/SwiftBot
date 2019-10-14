@@ -46,18 +46,19 @@ client.on("message", m => {
 
 	let retort = retortCommands[m.content]
 	if(retort != null) {
-		if(retort.whitelist != null && retort.whitelist.length > 0 && !retort.whitelist.includes(""+m.channel.id)) { return }
-
 		let text = retort.text.split("%")
 		let retortOutput = ""
 		for(let i = 0; i < text.length; i++) {
 			if(i % 2 == 0) {
 				retortOutput += text[i]
 			} else {
-				retortOutput += retortData[text[i]][random(retortData[text[i]].length)]
+				let newText = retortData[text[i]][random(retortData[text[i]].length)].split("")
+				newText[0] = newText[0].toLowerCase();
+				retortOutput += newText.join("")
 			}
 		}
 
+		retortOutput = retortOutput.replace(" ", "")
 		m.channel.send(retortOutput)
 	}
 })
