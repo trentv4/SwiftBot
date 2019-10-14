@@ -52,9 +52,14 @@ client.on("message", m => {
 			if(i % 2 == 0) {
 				retortOutput += text[i]
 			} else {
-				let newText = retortData[text[i]][random(retortData[text[i]].length)].split("")
-				newText[0] = newText[0].toLowerCase();
-				retortOutput += newText.join("")
+				//This is a poor solution. Ideal: alternate syntax ($lowerCaseText$) for lowercased
+				if(retort.lowerCase != null && retort.lowerCase == true) {
+					let newText = retortData[text[i]][random(retortData[text[i]].length)].split("")
+					newText[0] = newText[0].toLowerCase();
+					retortOutput += newText.join("")
+				} else {
+					retortOutput += retortData[text[i]][random(retortData[text[i]].length)]
+				}
 			}
 		}
 
