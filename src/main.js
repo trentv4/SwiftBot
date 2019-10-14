@@ -46,6 +46,8 @@ client.on("message", m => {
 
 	let retort = retortCommands[m.content]
 	if(retort != null) {
+		if(retort.whitelist != null && retort.whitelist.length > 0 && !retort.whitelist.includes(""+m.channel.id)) { return }
+		
 		let text = retort.text.split("%")
 		let retortOutput = ""
 		for(let i = 0; i < text.length; i++) {
