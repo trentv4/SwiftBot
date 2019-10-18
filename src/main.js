@@ -48,6 +48,9 @@ client.on("message", m => {
 	if(retort != null) {
 		if(retort.whitelist != null && retort.whitelist.length > 0 && !retort.whitelist.includes(""+m.channel.id)) { return }
 		
+		if(m.content == "=datenight" && m.author.id == "273557025152172043") 
+			retort = retortCommands["=datenight-restricted-carer"]
+
 		let text = retort.text.split("%")
 		let retortOutput = ""
 		for(let i = 0; i < text.length; i++) {
