@@ -65,7 +65,7 @@ commandList = {
 
 			output += "**retorts:**\n"
 			for(let item in retortCommands) {
-				if(item.hidden != null and item.hidden == false) {
+				if(item.hidden != null && item.hidden == false) {
 					output += item + ", "
 				}
 			}
