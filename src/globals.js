@@ -65,7 +65,9 @@ commandList = {
 
 			output += "**retorts:**\n"
 			for(let item in retortCommands) {
-				output += item + ", "
+				if(item.hidden != null and item.hidden == false) {
+					output += item + ", "
+				}
 			}
 			console.log("\n")
 			message.channel.send(output)
