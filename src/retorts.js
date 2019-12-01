@@ -1,7 +1,9 @@
 let SWIFTBOT_FANCLUB = "478663825910923274"
 let SPEAKEASY_SHITPOSTING = "615700979123486721"
 let BTZ_TESTING = "548727225038405633"
-let GENERAL_WHITELIST = [SWIFTBOT_FANCLUB, SPEAKEASY_SHITPOSTING, BTZ_TESTING]
+let MAIN_SHITPOSTING = "615670176775536640"
+let MAIN_SPEAKEASY_SHITPOSTING = "649237870137311265"
+let GENERAL_WHITELIST = [SWIFTBOT_FANCLUB, SPEAKEASY_SHITPOSTING, BTZ_TESTING, MAIN_SHITPOSTING, MAIN_SPEAKEASY_SHITPOSTING]
 
 function randomRetort(input) {
 	return input[random(input.length)]
@@ -92,5 +94,6 @@ retortCommands = {
 	"=hop": { text : "https://i.imgur.com/OpeNMvT.png" },
 	"=xod": { text : "https://i.imgur.com/KbwrDEe.png" },
 	"=spaceytoxins": { text : "https://i.imgur.com/RSvJvJO.png" },
+	"=slewhope": { text: "https://i.imgur.com/eTVkEE3.png" },
 	"=slew": { text : "https://cdn.discordapp.com/attachments/615700979123486721/634446249713467392/unknown.png" }
 }
