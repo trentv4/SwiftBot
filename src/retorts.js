@@ -94,5 +94,6 @@ retortCommands = {
 	"=xod": { text : "https://i.imgur.com/KbwrDEe.png" },
 	"=spaceytoxins": { text : "https://i.imgur.com/RSvJvJO.png" },
 	"=slewhope": { text: "https://i.imgur.com/eTVkEE3.png" },
+	"=poppop": { text: "https://media.discordapp.net/attachments/649237870137311265/674011143852916756/unknown.png"},
 	"=slew": { text : "https://cdn.discordapp.com/attachments/615700979123486721/634446249713467392/unknown.png" }
 }
