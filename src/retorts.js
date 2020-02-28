@@ -92,8 +92,11 @@ retortCommands = {
 	"=omni": { text : "https://media.discordapp.net/attachments/615700979123486721/615717013628649474/image.jpg" },
 	"=hop": { text : "https://i.imgur.com/OpeNMvT.png" },
 	"=xod": { text : "https://i.imgur.com/KbwrDEe.png" },
-	"=spaceytoxins": { text : "https://i.imgur.com/RSvJvJO.png" },
+	"=spaceytoxins": { text: "https://i.imgur.com/RSvJvJO.png" },
+	"=abetterworld": { text: "https://media.discordapp.net/attachments/615667903160647687/673836365108084756/unknown.png"},
 	"=slewhope": { text: "https://i.imgur.com/eTVkEE3.png" },
 	"=poppop": { text: "https://media.discordapp.net/attachments/649237870137311265/674011143852916756/unknown.png"},
-	"=slew": { text : "https://cdn.discordapp.com/attachments/615700979123486721/634446249713467392/unknown.png" }
+	"=slew": { text : "https://cdn.discordapp.com/attachments/615700979123486721/634446249713467392/unknown.png" },
+	"=jakemoney": { text: "https://i.imgur.com/DWma4jn.png"},
+	"=slewlationship": { text: "https://media.discordapp.net/attachments/648935579140227103/682657659068874982/Screenshot_20200227-133734_Discord.jpg"}
 }
