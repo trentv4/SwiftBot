@@ -57,9 +57,6 @@ retortCommands = {
 	"Why you gotta be so mean?": {
 		text: "%Why you gotta be so mean?%"
 	},
-	"=bigboss": {
-		text: "%Why you gotta be so mean?%"
-	},
 	"=x": { text : "https://i.imgur.com/A2B0rnN.png" },
 	"=dragonbbq": { text: "https://i.imgur.com/LJ4HLNZ.png" },
 	"=tikka": { text : "https://i.imgur.com/aJS28DZ.png" },
