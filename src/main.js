@@ -34,7 +34,8 @@ client.on("message", m => {
 	if(command != null) {
 		if(command.meta.whitelist.length > 0 && !command.meta.whitelist.includes(m.channel.id)) { return }
 
-		console.write(`Running command by ${getUsername(m)}: ${m.content}`)
+		console.write(`${getUsername(m)}: COMMAND | ${m.content}`)
+
 		command.execute(
 			m.content.substring(1, m.content.length).split(" ").splice(1), 
 			m, 
@@ -48,9 +49,6 @@ client.on("message", m => {
 	if(retort != null) {
 		if(retort.whitelist != null && retort.whitelist.length > 0 && !retort.whitelist.includes(""+m.channel.id)) { return }
 		
-		if(m.content == "=datenight" && m.author.id == "273557025152172043") 
-			retort = retortCommands["=datenight-restricted-carer"]
-
 		let text = retort.text.split("%")
 		let retortOutput = ""
 		for(let i = 0; i < text.length; i++) {
@@ -69,6 +67,7 @@ client.on("message", m => {
 		}
 
 		retortOutput = retortOutput.replace(" ", "")
+		console.log(`${getUsername(m)}: RETORT  | "${m.content}" with response "${retortOutput}"`)
 		m.channel.send(retortOutput)
 	}
 })

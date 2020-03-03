@@ -69,7 +69,6 @@ commandList = {
 					output += item + ", "
 				}
 			}
-			console.log("\n")
 			message.channel.send(output)
 		}
 	}
