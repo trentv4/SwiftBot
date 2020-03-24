@@ -50,7 +50,7 @@ retortCommands = {
 		text: "%stoopkid%\n\n%stoopkid%\n\n%stoopkid%"		
 	},
 	"=datenight": {
-		whitelist: GENERAL_WHITELIST,
+		whitelist: GENERAL_WHITELIST,	
 		lowerCase: true,
 		text: `Try %wuteat% with some %wutdrink% to wash it down. Then later, %howfuck% %wherefuck%`
 	},
@@ -98,6 +98,7 @@ retortCommands = {
 	"=poppop": { text: "https://media.discordapp.net/attachments/649237870137311265/674011143852916756/unknown.png"},
 	"=slew": { text : "https://cdn.discordapp.com/attachments/615700979123486721/634446249713467392/unknown.png" },
 	"=jakemoney": { text: "https://i.imgur.com/DWma4jn.png"},
+	"=natty": { text: "https://i.imgur.com/MC6NIkC.jpg"},
 	"=thebestworld": { text: "https://media.discordapp.net/attachments/649237870137311265/691838513431183430/anna-calcaterra-map.jpg"},
 	"=nip": { text: "https://media.discordapp.net/attachments/649237870137311265/691386976930234428/image0.jpg"},
 	"=ohio": { text: `I offer you this cautionary tale of my expedition through the accursed lands of Ohio. The whole of the state is covered in a thin skin of unreality, promising untold horrors should you look past the first layer. Advanced technologies stood side by side in the damned fields with primitive plows operated by regressive luddites. Men were strung up in dark oaks older than creation with their crime of "TAX MAN" written on their chests in blood. The soil beneath my feet greedily sucked the life force from me for every step I took in order to grow stronger itself. Every second spent in the border, an omnipresent malevolent force drained my very soul to replace it with an otherworldly impetus to till the land and shoot tax collectors on sight. From the south I could feel a powerful psychic energy which could only have been slew's intense hatred of city dwellers being cast far afield. Near the end of my travels I was accosted by nearly inhuman field hands, armed with dull scythes and rusty shotguns, who sought to use my corpse for fertilizer in their cursed fields. They persued me with an intense focus until I crossed the border.`},
