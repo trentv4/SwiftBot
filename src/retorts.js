@@ -73,6 +73,7 @@ retortCommands = {
 	"=whohurtjonsie": { text: "https://i.imgur.com/fWbShAd.png" },
 	"=whohurtjonsie2": { text: "https://cdn.discordapp.com/attachments/648935579140227103/693254168097587270/unknown.png" },
 	"=whohurtjonsie3": { text: "https://i.imgur.com/h1hxJF6.png" },
+	"=gassy": { text: "https://cdn.discordapp.com/attachments/478663825910923274/711379901483188274/image0.png" },
 	"=gone": { text: "https://cdn.discordapp.com/attachments/521045249095893002/690195490322645069/unknown.png"},
 	"=group-covid19": { text: "https://cdn.discordapp.com/attachments/521045249095893002/690067926837231694/COVID_19_group_small_size.jpg" },
 	"=beau": { text: "https://cdn.discordapp.com/attachments/521045127796490240/706578611703906314/ezgif-6-f7585b24e747.gif" },
