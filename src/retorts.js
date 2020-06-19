@@ -52,7 +52,7 @@ retortCommands = {
 	"=datenight": {
 		whitelist: GENERAL_WHITELIST,	
 		lowerCase: true,
-		text: `Try %wuteat% with some %wutdrink% to wash it down. Then later, %howfuck% %wherefuck%`
+		text: `Try %wuteat% with some %wutdrink% to wash it down. Then later, fat fucking creampie %wherefuck%`
 	},
 	"Why you gotta be so mean?": {
 		text: "%Why you gotta be so mean?%"
@@ -80,5 +80,6 @@ retortCommands = {
 	"=straight": { text: "https://media.discordapp.net/attachments/606345444972429332/718268968162295849/image0.png" },
 	"=explode": { text: "https://cdn.discordapp.com/attachments/478663825910923274/718269216288931870/20_inch_superiority.png" },
 	"=ontheclock": { text: "https://i.imgur.com/c1yQJQM.png" },
+	"=autistic": { text: "https://media.discordapp.net/attachments/257238071077109765/722858916924620850/OiNsZyqyI36OWazKQKBchw_r.png" },
 	"=ohio": { text: `I offer you this cautionary tale of my expedition through the accursed lands of Ohio. The whole of the state is covered in a thin skin of unreality, promising untold horrors should you look past the first layer. Advanced technologies stood side by side in the damned fields with primitive plows operated by regressive luddites. Men were strung up in dark oaks older than creation with their crime of "TAX MAN" written on their chests in blood. The soil beneath my feet greedily sucked the life force from me for every step I took in order to grow stronger itself. Every second spent in the border, an omnipresent malevolent force drained my very soul to replace it with an otherworldly impetus to till the land and shoot tax collectors on sight. From the south I could feel a powerful psychic energy which could only have been slew's intense hatred of city dwellers being cast far afield. Near the end of my travels I was accosted by nearly inhuman field hands, armed with dull scythes and rusty shotguns, who sought to use my corpse for fertilizer in their cursed fields. They persued me with an intense focus until I crossed the border.`}
 }
