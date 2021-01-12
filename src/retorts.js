@@ -57,6 +57,7 @@ retortCommands = {
 	"Why you gotta be so mean?": {
 		text: "%Why you gotta be so mean?%"
 	},
+	"=trent": { text: "https://i.imgur.com/yg1ffJs.png" },
 	"=x": { text : "https://i.imgur.com/A2B0rnN.png" },
 	"=dangerzone": { text: "https://i.imgur.com/7ltzQMr.jpeg" },
 	"=922r": { text : "https://i.imgur.com/mDYy8Xr.png" },
